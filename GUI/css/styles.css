@@ -1,8 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
 @import "reset.css";
 @import "status-bar.css";
+@import "welcome-header.css";
 
 body {
   font-family: "Open Sans", sans-serif;
-  background-color: #212121;
+  background-image: url(https://c.wallhere.com/photos/65/d4/horizon_clouds_League_of_Legends-23569.png!d);
+  background-repeat: no-repeat;
+  background-size: cover;
 }

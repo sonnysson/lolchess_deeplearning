@@ -1,18 +1,19 @@
 .status-bar {
-  margin-top: 5;
-  margin: 25px 55px;
-  padding: 30px 25px;
+  background-color: #0f3058;
+  padding: 0px 150px;
   display: flex;
-  font-size: 30px;
+  font-size: 15px;
   font-weight: bold;
-  justify-content: space-between;
+  justify-content: center;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
 }
-.status-bar__column:first-child span {
-  display: flex;
-  justify-content: flex-start;
-  padding: auto;
+.preview {
+  text-decoration-line: none;
+  color: #c7ced6;
+  padding: 15px 25px;
 }
-.status-bar__column:last-child span {
-  display: flex;
-  justify-content: flex-end;
+.preview:hover {
+  background-color: #443592;
 }
