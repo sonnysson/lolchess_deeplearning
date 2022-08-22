@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoLChess</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div class="status-bar">
+        <div class = :"status-bar__column">
+            <span>Home</span>
+        </div>
+        <div class = :"status-bar__column">
+            <span>STATS</span>
+        </div>
+        <div class = :"status-bar__column">
+            <span>LEADERBOARD</span>
+        </div>
+        <div class = :"status-bar__column">
+            <span>TEAMBUILDER</span>
+        </div>
+        <!-- tools  -->
+        <!-- info   -->
+    </div>
+    <header class = 'welcome-header'>
+        <h1 class = 'welcome-header__title'>Welcome to LoLChessDeaplearning</h1>
+        <p class = 'welcome-header__text'>
+            We recommend a variety of decks with high win rates.</p>
+    </header>
+    
+    <form id = 'search-form'>
+        <label for="Search for a player"></label>
+        <select name="Search for a player" id= "Search-players">
+        <option value="KR">KR</option>
+        <option value="EUNE">EUNE</option>
+        <option value="EUW">EUW</option>
+        <option value="JP">JP</option>
+        <option value="KR">KR</option>
+        <option value="LAN">LAN</option>
+        <option value="NA">NA</option>
+    </select>
+        <input type="text" placeholder="Summoner Name"/>
+        <input type="button" value="Search"/>
+    </form>
+  </body>
+</html>
