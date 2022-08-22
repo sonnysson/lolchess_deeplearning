@@ -1,18 +1,24 @@
 .status-bar {
-  background-color: #0f3058;
-  padding: 0px 150px;
+  width: 100%;
+  height: 4%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
+  background-color: #0f3058;
   font-size: 15px;
   font-weight: bold;
   justify-content: center;
-  cursor: pointer;
-  text-align: center;
   align-items: center;
 }
 .preview {
+  cursor: pointer;
   text-decoration-line: none;
   color: #c7ced6;
-  padding: 15px 25px;
+  justify-content: center;
+  padding: 0.63% 15px;
+  margin: 0px;
 }
 .preview:hover {
   background-color: #443592;
