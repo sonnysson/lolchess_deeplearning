@@ -46,9 +46,14 @@
       </li>
     </div>
 
-    <form id="search-form">
-      <label for="Search for a player"></label>
-      <select name="Search for a player" id="Search-players">
+    <form class="search-form">
+      <h4 class="search-form__title">Search for a player</h4>
+
+      <select
+        name="Search for a player"
+        id="Search-players"
+        style="width: 75px; font-size: 22px; color: #17181a"
+      >
         <option value="KR">KR</option>
         <option value="EUNE">EUNE</option>
         <option value="EUW">EUW</option>
@@ -57,8 +62,19 @@
         <option value="LAN">LAN</option>
         <option value="NA">NA</option>
       </select>
+
       <input type="text" placeholder="Summoner Name" />
       <input type="button" value="Search" />
     </form>
+
+    <div class="recommand">
+      <span class="recommand-best">Best Combination</span>
+      <div class="recommend-list:">recommend1</div>
+      <div class="recommend-list:">recommend2</div>
+      <div class="recommend-list:">recommend3</div>
+      <div class="recommend-list:">recommend4</div>
+      <div class="recommend-list:">recommend5</div>
+      <div class="recommend-list:">recommend6</div>
+    </div>
   </body>
 </html>

@@ -2,10 +2,34 @@
 @import "reset.css";
 @import "status-bar.css";
 @import "welcome-header.css";
+@import "search-form.css";
 
 body {
   font-family: "Open Sans", sans-serif;
+  background-color: black;
   background-image: url(https://c.wallhere.com/photos/65/d4/horizon_clouds_League_of_Legends-23569.png!d);
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.recommand {
+  margin: 15px 500px;
+  padding: 15px 0px;
+  border-radius: 5px;
+  background-color: #0f3058;
+}
+.recommand-best {
+  padding: 9.5px 609px 9.5px 30px;
+  border-radius: 5px;
+  color: #c7ced6;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #1c3856;
+}
+.recommand:nth-child(2) {
+  padding: 9.5px 609px 9.5px 30px;
+}
+.recommand-list {
 }
