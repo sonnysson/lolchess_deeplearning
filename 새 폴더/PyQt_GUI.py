@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QLabel
 from PyQt5.QtTest import *
 from PyQt5 import uic
 
+
 class QPushButtonUpload(QPushButton):
     def __init__(self,parent=None):
         super().__init__(parent)
@@ -26,7 +27,13 @@ class QGridLayoutChampion(QGridLayout):
 
         super().__init__(parent)
         
-
+class QPushButtonItem(QPushButton):
+    def __init__(self, parent = None):
+        super().__init__(parent)
+        self.setFixedHeight(24)
+        self.setFixedWidth(24)
+        self.setIconSize(QSize(24,24))
+    
 class QPushButtonReset(QPushButton):
     def __init__(self, parent = None):
         super().__init__(parent)
@@ -61,10 +68,10 @@ class Main(QDialog):
         self.items ={}
         
         for index,filename in enumerate(self.item_name):
-            pixmap=QPixmap(f"image\items\{filename}")           
-            item = QLabel()
-      
-            item.setPixmap(pixmap)
+            pixmap=QPixmap(f"image\items\{filename}")     
+            pixmap = pixmap.scaled(45,45,Qt.IgnoreAspectRatio)      
+            item = QIcon()
+            item.addPixmap(pixmap)
             
             self.items[index] = item      
             
@@ -132,9 +139,9 @@ class Main(QDialog):
             suggest_layout.addWidget(button,index)
             
         for index in range(30):
-            label = QItemLabel()
-            self.item_labels[index]=label
-            item_layout.addWidget(label,index)
+            button = QPushButtonItem()
+            self.item_labels[index]=button
+            item_layout.addWidget(button,index)
             
         rows = 0
         columns = 0
@@ -155,7 +162,6 @@ class Main(QDialog):
             if columns % 7 == 0:
                 columns = 0
                 rows += 1
-                
         middle_layout.addLayout(champion_layout,0)
         textbox = QLabel()
         middle_layout.addWidget(textbox,1)
@@ -214,7 +220,7 @@ class Main(QDialog):
             index = idx_last + list_len
             pbuttons = self.pbuttons[index]
             pbuttons.setIcon(QIcon())
-            
+   
     def pbutton_clicked(self,state,idx):
         if idx>=len(self.selection_list):
             pass
@@ -229,19 +235,29 @@ class Main(QDialog):
         
         for button in self.pbuttons.values():
             button.setIcon(QIcon())
+            
         for button in self.sbuttons.values():
             button.setIcon(QIcon())
-    
+            
+        for button in self.item_labels.values():
+            button.setIcon(QIcon())
     
     def solution(self):
         self.suggest_list = [12,26,35,12,26,35,12,26,35,7]
-        self.item_list =[0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
+        self.item_list =[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
         
     def action_solution(self):
         self.champion_btn_disable()
         self.solution()
-        self.set_suggest_index()
+        self.set_suggest_index()   
+        self.set_suggest_item() 
         
+    def set_suggest_item(self):
+        for idx in range(len(self.item_list)):
+            itemname = self.item_labels[idx]
+            num = self.item_list[idx]
+            item = self.items[num]
+            itemname.setIcon(item)
         
     def champion_btn_able(self):
         for index,button in self.push_buttons.items():
