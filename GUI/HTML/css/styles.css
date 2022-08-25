@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+@import "reset.css";
+@import "status-bar.css";
+@import "welcome-header.css";
+@import "search-form.css";
+@import "recommand.css";
+
+body {
+  font-family: "Open Sans", sans-serif;
+  padding-top: 2%;
+  background-color: black;
+  background-image: url(https://c.wallhere.com/photos/65/d4/horizon_clouds_League_of_Legends-23569.png!d);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.button {
+  color: none;
+}
+
+.champions {
+  background-color: #0f3058;
+  margin: 25px 500px;
+  padding: 20px;
+  width: 50%;
+  height: 50%;
+  border-radius: 5px;
+  color: none;
+  position: relative;
+  justify-content: center;
+}
+.champions-row__1 {
+  display: flex;
+  margin: 5px;
+  padding: 5px;
+}
+.champions-row__2 {
+  display: flex;
+}
+.champions-row__3 {
+  display: flex;
+}
+.champions-row__4 {
+  display: flex;
+}
+.champions-row__5 {
+  display: flex;
+}
+div.champion {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+}
+
+.champion {
+  cursor: pointer;
+}
+
+.champion:hover {
+  top: auto;
+}

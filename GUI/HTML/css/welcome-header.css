@@ -1,0 +1,19 @@
+.welcome-header {
+  color: #c7ced6;
+  margin: 35px 500px;
+  width: 50%;
+  height: 50%;
+  padding: 16px;
+  border-radius: 5px;
+
+  background-color: #0f3058;
+  justify-content: center;
+}
+.welcome-header__title {
+  padding: 15px 40px;
+  font-size: 45px;
+  font-weight: bolder;
+}
+.welcome-header__text {
+  margin: 15px 15px 5px;
+}
