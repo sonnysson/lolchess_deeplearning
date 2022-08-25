@@ -1,0 +1,38 @@
+QDialog {
+  background-image: url("image/background.png");
+}
+
+QPushButton {
+  margin: 0%;
+}
+
+QPushButtonIcon {
+  border: 4px solid rgb(0, 255, 0, 0.3);
+  border-radius: 8px;
+  margin-right: 0%;
+  background: None;
+}
+
+QPushButtonIcon:hover {
+  border: 4px solid rgb(0, 255, 0, 1);
+}
+
+QPushButtonReset {
+  background-color: rgb(247, 230, 0, 0.5);
+  color: black;
+  border-radius: 5px;
+}
+
+QPushButtonReset:hover {
+  background-color: rgb(247, 230, 0, 1);
+}
+
+QPushButtonSolution {
+  background-color: rgb(80, 188, 223, 0.5);
+  color: black;
+  border-radius: 5px;
+}
+
+QPushButtonSolution:hover {
+  background-color: rgb(80, 188, 223, 1);
+}
