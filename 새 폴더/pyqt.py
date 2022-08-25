@@ -1,7 +1,9 @@
 import sys
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel
 from PyQt5.QtTest import *
 from PyQt5 import uic
 
@@ -15,17 +17,14 @@ class QPushButtonUpload(QPushButton):
 class QPushButtonIcon(QPushButton):
     def __init__(self, parent = None):
         super().__init__(parent)
-        self.setFixedHeight(45)
-        self.setFixedWidth(45)
-        self.setIconSize(QSize(41,41))
+        self.setFixedHeight(60)
+        self.setFixedWidth(60)
+        self.setIconSize(QSize(60,60))
         
-class champion_layout(QGridLayout):
+class QGridLayoutChampion(QGridLayout):
     def __init__(self, parent = None):
 
         super().__init__(parent)
-        self.setFixedHeight(45)
-        self.setFixedWidth(45)
-        self.setIconSize(QSize(80,80))
         
 
 class QPushButtonReset(QPushButton):
@@ -36,6 +35,11 @@ class QPushButtonReset(QPushButton):
         font.setBold(True)
         self.setFont(font)
 
+class QItemLabel(QLabel):
+    def __init__(self, parent = None):
+        super().__init__(parent)
+        self.setFixedHeight(25)
+        self.setFixedWidth(23)
 
 class Main(QDialog):
     
@@ -44,10 +48,29 @@ class Main(QDialog):
         self.set_champions()
         self.init_ui()
         self.set_style()
-        
+        self.set_items()
 
-    
+    def set_items(self):
+        self.item_name = ["ArcaneGauntlet.png","Archangelembrace.png","Backhand.png","Bloodthirster.png","BlueBuff.png","BrambleVest.png","Chalice.png",
+                      "Curtainofsilence.png","DragonsClaw.png","FrozenHeart.png","GiantSlayer.png","GuardianAngel.png","GuinsoosRageblade.png",
+                      "HandofJustice.png","HextechGunblade.png","InfinityEdge.png","IonicSpark.png","IronWill.png","LastWhisper.png","LocketoftheIronSolari.png",
+                      "LordsEdge.png","Morellonomicon.png","Quicksilver.png","RabadonsDeathcap.png","RapidFirecannon.png","Redemption.png","RunaansHurricane.png",
+                     "SpearofShojin.png","StatikkShiv.png","SunfireCape.png","ThiefsGloves.png","TitansResolve.png","Warmog'sArmor.png","ZekesHerald.png",
+                     "Zephyr.png","ZzRotPortal.png"]
+        
+        self.items ={}
+        
+        for index,filename in enumerate(self.item_name):
+            pixmap=QPixmap(f"image\items\{filename}")           
+            item = QLabel()
+      
+            item.setPixmap(pixmap)
+            
+            self.items[index] = item      
+            
     def set_champions(self):
+        self.suggest_list=[]
+        self.item_list=[]
         self.selection_list = []
         
         self.figures = ["Aatrox.png","Anivia.png","AoShin.png","Ashe.png","AurelionSol.png","Bard.png",
@@ -74,14 +97,10 @@ class Main(QDialog):
             
             self.icons[index] = icon
             self.icons_for_index[index] = icon_for_index
-            
-
-
-
  
             
     def set_style(self):
-        with open("style", 'r') as f:
+        with open("style.css", 'r') as f:
             self.setStyleSheet(f.read())
 
 
@@ -89,12 +108,16 @@ class Main(QDialog):
         self.setWindowTitle('lolchess')
         
         main_layout = QVBoxLayout()
-        
+        middle_layout=QHBoxLayout()
         champion_layout = QGridLayout()
         select_layout = QHBoxLayout()
         suggest_layout = QHBoxLayout()
+        button_layout = QGridLayout()        
+        item_layout=QHBoxLayout()
         
         self.pbuttons = {}
+        self.sbuttons = {}
+        self.item_labels={}
         
         for index in range(10):
             button = QPushButtonUpload()
@@ -105,15 +128,19 @@ class Main(QDialog):
         
         for index in range(10):
             button = QPushButtonUpload()
-            button.clicked.connect(lambda state, button = button, idx = index:
-                                   self.sbutton_clicked(state, idx, button))
+            self.sbuttons[index] = button
             suggest_layout.addWidget(button,index)
-
-        
+            
+        for index in range(30):
+            label = QItemLabel()
+            self.item_labels[index]=label
+            item_layout.addWidget(label,index)
+            
         rows = 0
         columns = 0
         
         self.push_buttons = {}     
+        
         for idx, icon in self.icons.items():
             button = QPushButtonIcon()
             button.setIcon(icon)
@@ -128,12 +155,25 @@ class Main(QDialog):
             if columns % 7 == 0:
                 columns = 0
                 rows += 1
+        middle_layout.addLayout(champion_layout,0)
+        textbox = QLabel()
+        middle_layout.addWidget(textbox,1)
+                
+        self.button_reset = QPushButtonReset("Reset")
+        self.button_reset.clicked.connect(self.action_reset)
 
+        self.button_solution = QPushButtonReset("Solution")
+        self.button_solution.clicked.connect(self.action_solution)
+
+        button_layout.addWidget(self.button_reset,0,0)
+        button_layout.addWidget(self.button_solution,0,1)
+        
         main_layout.addLayout(select_layout)   
         main_layout.addLayout(suggest_layout)  
-        main_layout.addLayout(champion_layout)
+        main_layout.addLayout(item_layout)
+        main_layout.addLayout(middle_layout)
+        main_layout.addLayout(button_layout)
         
-
         self.setLayout(main_layout)
         self.setFixedSize(main_layout.sizeHint())
         self.setWindowTitle("LoL Chess")
@@ -151,6 +191,13 @@ class Main(QDialog):
             champnum = self.selection_list[idx]
             icon = self.icons_for_index[champnum]
             pbuttons.setIcon(icon)
+            
+    def set_suggest_index(self):
+        for idx in range(len(self.suggest_list)):
+            sbuttons = self.sbuttons[idx]
+            champnum = self.suggest_list[idx]
+            icon = self.icons_for_index[champnum]
+            sbuttons.setIcon(icon)
     
     def delete_button_index(self):  
         list_len = len(self.selection_list)
@@ -168,23 +215,47 @@ class Main(QDialog):
             pbuttons.setIcon(QIcon())
    
     def pbutton_clicked(self,state,idx):
-        if idx>len(self.selection_list):
+        if idx>=len(self.selection_list):
             pass
         elif self.selection_list[idx] != None:
             del self.selection_list[idx]
             self.delete_button_index()
             
-
-
     def action_reset(self):
-        
+        self.champion_btn_able()
+        self.suggest_list=[]
         self.selection_list = []
         
-        for button in self.qbuttons.values():
-            button.setDisabled(False)
+        for button in self.pbuttons.values():
+            button.setIcon(QIcon())
         for button in self.sbuttons.values():
-            button.setIcon(QIcon())        
-            
+            button.setIcon(QIcon())
+    
+    
+    def solution(self):
+        self.suggest_list = [12,26,35,12,26,35,12,26,35,7]
+        self.item_list =[0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
+        
+    def action_solution(self):
+        self.champion_btn_disable()
+        self.solution()
+        self.set_suggest_index()   
+        self.set_suggest_item() 
+        
+    def set_suggest_item(self):
+        for idx in range(len(self.item_list)):
+            itemname = self.item_labels[idx]
+            num = self.item_list[idx]
+            item = self.items[num]
+            itemname.setPixmap(self,item)
+        
+    def champion_btn_able(self):
+        for index,button in self.push_buttons.items():
+            button.setEnabled(True)            
+        
+    def champion_btn_disable(self):
+        for index,button in self.push_buttons.items():
+            button.setDisabled(True)         
             
 if __name__ == '__main__':
     app = QApplication(sys.argv)
