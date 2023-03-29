@@ -2,11 +2,7 @@ QDialog {
   background-image: url("image/background.png");
 }
 
-QLabelCustom {
-  background-color: #0e2b4d;
-}
-
-QHotbox QPushButton {
+QPushButton {
   margin: 0%;
 }
 
